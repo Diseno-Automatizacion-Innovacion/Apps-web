@@ -12,11 +12,11 @@ export default function Juego({ params }: { params: { slug: string } }) {
             const data = await (await fetch("/api/juegos", {
                 method: "POST",
                 body: JSON.stringify({
-                    "queary": params.slug
+                    "query": params.slug
                 })
             })).json()
             console.log("Prueba: " + JSON.stringify(data.data[0].attributes.comments))
-            document.title = data?.data[0]?.attributes?.Titulo
+            document.title = "apps-web - " + data?.data[0]?.attributes?.Titulo
             setData(data.data)
         }
         getData()

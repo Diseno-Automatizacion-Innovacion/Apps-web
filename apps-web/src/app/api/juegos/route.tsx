@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     const data = await req.json()
 
-    const slug = data.queary
+    const slug = data.query
 
 
     let retrieve = await (await fetch(`https://strapi.garcalia.com/api/juegos?filters[slug][$eq]=${slug}&populate=*`)).json()
