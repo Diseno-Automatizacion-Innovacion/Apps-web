@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import image from "../../public/images/minecraft.png"
+import Link from 'next/link'
 
 export default function Home() {
 
@@ -12,15 +13,34 @@ export default function Home() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       alert("Mejor usa el pc")
     }
+    async function prueba() {
+      const data = await (await fetch("/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify({
+          user: "Prueba",
+          email: "prueba@prueba.com",
+          password: "12345678910"
+        })
+      })).json()
+      console.log(data)
+    }
+    prueba()
   }, [])
 
   return (
     <>
       <header className="fixed z-[999] bg-slate-500 p-7 w-screen text-slate-900 shadow-[0px_2px_0px_0px_rgba(0,0,255)]">
-        <nav>
-          <ul className="flex gap-8 text-l">
-            <li className="hover:text-blue-700 duration-200 ease-in-out"><a href="http://localhost:3000/nosotros">Nosotros</a></li>
-            <li className="hover:text-blue-700 duration-200 ease-in-out"><a href="http://localhost:3000/juegos">Juegos</a></li>
+        <nav className="flex gap-8">
+          <ul className="flex gap-8 text-l align-middle items-center">
+            <li className="hover:text-blue-700 duration-200 ease-in-out"><Link href="http://localhost:3000/nosotros">Nosotros</Link></li>
+            <li className="hover:text-blue-700 duration-200 ease-in-out"><Link href="http://localhost:3000/juegos">Juegos</Link></li>
+
+          </ul>
+          <ul>
+            <div className="flex justify-end gap-8 text-l items-center">
+              <li className="hover:text-blue-700 duration-200 ease-in-out"><Link href="http://localhost:3000/auth/login">Login</Link></li>
+              <li className="hover:text-blue-700 duration-200 ease-in-out"><Link href="http://localhost:3000/auth/register">Register</Link></li>
+            </div>
           </ul>
         </nav>
       </header>
@@ -40,7 +60,7 @@ export default function Home() {
           <Image className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://strapi.garcalia.com/uploads/download_815f3c00e7.jpg" alt="Minecraft" width={1920} height={1080} />
           <div className="flex flex-col justify-between p-4 leading-normal">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Minecraft</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Ultimos mods para &quot;Minecraft&quot;</p>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Últimos mods para &quot;Minecraft&quot;</p>
           </div>
         </a>
       </div>
