@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import '../globals.css'
 
 export const metadata: Metadata = {
     title: 'apps web - Juegos',
@@ -11,8 +12,8 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="es_ES">
-            <body >{children}</body>
+        <html lang="es">
+            <body>{children}</body>
         </html>
     )
 }
