@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
+import Navigation from '@/app/components/Navigation'
+
 export default function Juego({ params }: { params: { slug: string } }) {
 
     const router = useRouter()
@@ -28,26 +30,29 @@ export default function Juego({ params }: { params: { slug: string } }) {
 
     return (
         <>
-            {
-                data.map((el: any, i: number) => {
-                    return (
-                        <>
-                            <Image className='w-10 h-10' src={`https://strapi.garcalia.com${el?.attributes?.cover?.data?.attributes?.url || ""}`} alt={"Imagen " + params.slug} width={1920} height={1080}></Image>
-                            <div id='Body'>{el?.attributes?.Body}</div>
-                            <div id='Comments' className='text-white'>{
-                                el?.attributes?.comments?.data.map((el: any) => {
-                                    return (
-                                        <>
-                                            <div id='user'>{el.attributes.user}:</div>
-                                            <div id='message'>{el.attributes.message}</div>
-                                        </>
-                                    )
-                                })
-                            }</div>
-                        </>
-                    )
-                })
-            }
+            <Navigation></Navigation>
+            <div className='absolute top-24'>
+                {
+                    data.map((el: any, i: number) => {
+                        return (
+                            <>
+                                <Image className='w-10 h-10' src={`https://strapi.garcalia.com${el?.attributes?.cover?.data?.attributes?.url || ""}`} alt={"Imagen " + params.slug} width={1920} height={1080}></Image>
+                                <div id='Body'>{el?.attributes?.Body}</div>
+                                <div id='Comments' className='text-white'>{
+                                    el?.attributes?.comments?.data.map((el: any) => {
+                                        return (
+                                            <>
+                                                <div id='user'>{el.attributes.user}:</div>
+                                                <div id='message'>{el.attributes.message}</div>
+                                            </>
+                                        )
+                                    })
+                                }</div>
+                            </>
+                        )
+                    })
+                }
+            </div>
         </>
     )
 }
