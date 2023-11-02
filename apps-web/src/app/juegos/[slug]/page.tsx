@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function Juego({ params }: { params: { slug: string } }) {
 
-
+    const router = useRouter()
     const [data, setData] = useState([] as any)
     useEffect(() => {
         async function getData() {
@@ -15,12 +16,15 @@ export default function Juego({ params }: { params: { slug: string } }) {
                     "query": params.slug
                 })
             })).json()
-            console.log("Prueba: " + JSON.stringify(data.data[0].attributes.comments))
+            // console.log("Prueba: " + JSON.stringify(data.data[0].attributes.comments))
             document.title = "apps-web - " + data?.data[0]?.attributes?.Titulo
+            if (!data?.data[0]?.attributes?.Titulo) {
+                router.push("/juegos")
+            }
             setData(data.data)
         }
         getData()
-    }, [])
+    }, [params.slug, router])
 
     return (
         <>
@@ -28,10 +32,10 @@ export default function Juego({ params }: { params: { slug: string } }) {
                 data.map((el: any, i: number) => {
                     return (
                         <>
-                            <Image className='w-10 h-10' src={`https://strapi.garcalia.com${el.attributes.cover.data.attributes.url}`} alt='hola' width={1920} height={1080}></Image>
-                            <div id='Body'>{el.attributes.Body}</div>
+                            <Image className='w-10 h-10' src={`https://strapi.garcalia.com${el?.attributes?.cover?.data?.attributes?.url || ""}`} alt={"Imagen " + params.slug} width={1920} height={1080}></Image>
+                            <div id='Body'>{el?.attributes?.Body}</div>
                             <div id='Comments' className='text-white'>{
-                                el.attributes.comments.data.map((el: any) => {
+                                el?.attributes?.comments?.data.map((el: any) => {
                                     return (
                                         <>
                                             <div id='user'>{el.attributes.user}:</div>

@@ -40,7 +40,6 @@ export default function Home() {
               Últimos mods para &quot;Minecraft&quot;
             </p>
           </div>
-
         </a>
       </div>
     </div>
