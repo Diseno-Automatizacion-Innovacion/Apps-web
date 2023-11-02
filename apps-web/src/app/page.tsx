@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 import Navigation from "@/app/components/Navigation"
+import IndexTitle from './components/IndexTitle'
 
 
 export default function Home() {
@@ -19,13 +20,8 @@ export default function Home() {
   return (
     <div className='bg-slate-900'>
       <Navigation></Navigation>
-      <div id="container" className="flex font-kanit">
-        <div className="m-0 p-0 flex items-center justify-center text-slate-300 h-screen w-screen">
-          <h1 className="text-9xl align-middle">
-            app-web
-          </h1>
-        </div>
-      </div>
+
+      <IndexTitle title="Modink" secondTitle="Portal mods"></IndexTitle>
 
       <div className="flex items-center align-middle justify-center mb-10">
         <a id="minecraft" href="/juegos/minecraft" className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 duration-200 hover:shadow-[0_0px_60px_-15px_rgba(255,255,255,0.3)] ease-in-out dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -41,7 +37,7 @@ export default function Home() {
             </p>
           </div>
         </a>
-      </div>
+        I</div>
     </div>
   )
 }

@@ -80,7 +80,7 @@ export default function Register() {
                     {/* <input type="text" id="User" className="rounded p-2 text-center" placeholder="User" /> */}
                     <input type="email" id="Email" className="rounded p-2 text-center" placeholder="Email" />
                     <input type="password" id="Password" className="rounded p-2 text-center" placeholder="Password" />
-                    <input type="button" disabled={fetching} id="Register" className="cursor-pointer p-2 bg-slate-500 rounded" value={fetching ? "Espere..." : "Crear usuario"} />
+                    <input type="button" disabled={fetching} id="Register" className="cursor-pointer p-2 bg-slate-500 rounded" value={fetching ? "Espere..." : "Iniciar sesion"} />
                 </div>
             </div>
         </>

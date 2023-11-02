@@ -30,10 +30,10 @@ export default function Nav() {
             <nav className="flex gap-8">
                 <ul className="flex gap-8 text-l align-middle items-center">
                     <li className={navItemsClass}>
-                        <Link href="http://localhost:3000/">Nosotros</Link>
+                        <Link href="/">Nosotros</Link>
                     </li>
                     <li className={navItemsClass}>
-                        <Link href="http://localhost:3000/juegos">Juegos</Link>
+                        <Link href="/juegos">Juegos</Link>
                     </li>
 
                 </ul>
@@ -42,10 +42,10 @@ export default function Nav() {
                         !login?.username ?
                             <>
                                 <li className={navItemsClass + ""}>
-                                    <Link href="http://localhost:3000/auth/register">Crear usuario</Link>
+                                    <Link href="/auth/register">Crear usuario</Link>
                                 </li>
                                 <li className={navItemsClass + " bg-slate-700 rounded text-white"}>
-                                    <Link href="http://localhost:3000/auth/login">Iniciar sesion</Link>
+                                    <Link href="/auth/login">Iniciar sesion</Link>
                                 </li>
                             </>
                             :
