@@ -31,7 +31,7 @@ export default function IndexTitle(props: any) {
 
     return (
         <div id="container" className="flex font-kanit">
-            <div className="m-0 p-0 flex items-center justify-center text-slate-300 h-screen w-screen">
+            <div className="m-0 p-0 flex items-center justify-center bg-gradient-to-t from-slate-900 via-slate-500 to-slate-500 text-slate-300 h-screen w-screen">
                 <h1 className="text-9xl align-middle">
                     {displayTitle}
                     <span className="text-[rgb(0,0,255)] animate-blink">|</span>

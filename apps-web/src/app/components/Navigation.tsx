@@ -22,11 +22,22 @@ export default function Nav() {
                 setLogin(data.user)
             }
         }
+        function scroll() {
+            if (window.scrollY != 0) {
+                console.log(window.scrollY)
+                document.querySelector("#header")?.setAttribute("style", "box-shadow: 0px 2px 0px 0px rgba(0,0,255);")
+            }
+            else {
+                document.querySelector("#header")?.setAttribute("style", "box-shadow: 0px 0px 0px 0px rgba(0,0,255);")
+            }
+        }
+        window.addEventListener("scroll", scroll)
         getLogin()
     }, [])
 
     return (
-        <header className="fixed z-[999] bg-slate-500 p-7 w-screen text-slate-900 shadow-[0px_2px_0px_0px_rgba(0,0,255)]">
+        //shadow-[0px_2px_0px_0px_rgba(0,0,255)]
+        <header id="header" className="fixed z-[999] bg-slate-500 p-7 w-screen text-slate-900 duration-150">
             <nav className="flex gap-8">
                 <ul className="flex gap-8 text-l align-middle items-center">
                     <li className={navItemsClass}>
