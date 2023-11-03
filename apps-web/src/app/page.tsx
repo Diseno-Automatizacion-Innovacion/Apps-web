@@ -37,7 +37,7 @@ export default function Home() {
             </p>
           </div>
         </a>
-        I</div>
+      </div>
     </div>
   )
 }
