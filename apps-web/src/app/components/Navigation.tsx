@@ -41,7 +41,7 @@ export default function Nav() {
         }
         function scroll() {
             if (window.scrollY != 0) {
-                console.log(window.scrollY)
+                // console.log(window.scrollY)
                 document.querySelector("#header")?.setAttribute("style", "box-shadow: 0px 2px 0px 0px rgba(0,0,255);")
             }
             else {
