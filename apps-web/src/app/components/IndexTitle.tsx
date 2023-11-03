@@ -27,7 +27,7 @@ export default function IndexTitle(props: any) {
             animateTitle()
         }
         animateTitle()
-    }, [])
+    }, [props.title, props.secondTitle])
 
     return (
         <div id="container" className="flex font-kanit">
