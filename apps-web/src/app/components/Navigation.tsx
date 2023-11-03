@@ -8,6 +8,23 @@ export default function Nav() {
 
     const [login, setLogin] = useState({} as any)
 
+    function obtenerSaludo() {
+        const fecha = new Date();
+        const hora = fecha.getHours();
+
+        let saludo = '';
+
+        if (hora >= 6 && hora < 12) {
+            saludo = 'Buenos días';
+        } else if (hora >= 12 && hora < 20) {
+            saludo = 'Buenas tardes';
+        } else {
+            saludo = 'Buenas noches';
+        }
+
+        return saludo;
+    }
+
     useEffect(() => {
         async function getLogin() {
             const token = localStorage.getItem('token')
@@ -62,7 +79,7 @@ export default function Nav() {
                             :
                             <>
                                 <li className={navItemsClass}>
-                                    Bienvenido, {login.username}
+                                    {obtenerSaludo()}, {login.username}
                                 </li>
                             </>
                     }
