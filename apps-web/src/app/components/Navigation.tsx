@@ -36,7 +36,7 @@ export default function Nav() {
                 if (data?.error == "Nope") {
                     localStorage.removeItem("token")
                 }
-                setLogin(data.user)
+                setLogin(data)
             }
         }
         function scroll() {
@@ -67,7 +67,7 @@ export default function Nav() {
                 </ul>
                 <ul className='flex flex-row gap-2 m-auto mr-2'>
                     {
-                        !login?.username ?
+                        !login?.name ?
                             <>
                                 <li className={navItemsClass + ""}>
                                     <Link href="/auth/register">Crear usuario</Link>
@@ -79,7 +79,7 @@ export default function Nav() {
                             :
                             <>
                                 <li className={navItemsClass}>
-                                    {obtenerSaludo()}, {login.username}
+                                    {obtenerSaludo()}, {login.name}
                                 </li>
                             </>
                     }
