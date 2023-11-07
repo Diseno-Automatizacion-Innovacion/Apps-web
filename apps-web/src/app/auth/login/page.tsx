@@ -24,12 +24,12 @@ export default function Register() {
             const email = (document.querySelector("#Email") as HTMLInputElement)?.value
 
             if (!email) {
-                alert("Introduce un email")
+                alert("Introduce un email o usuario")
                 setFetching(false)
                 return
             }
-            if (!validEmail.test(email)) {
-                alert("El email introducido no es valido")
+            if (email.match(avoidEmptyStrings)) {
+                alert("El usuario no puede contener espacios")
                 setFetching(false)
                 return
             }

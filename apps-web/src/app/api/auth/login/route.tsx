@@ -10,19 +10,15 @@ export async function POST(req: NextRequest) {
     let res = {};
 
     await (
-        axios.post("https://strapi.garcalia.com/api/auth/local", {
-            identifier: email,
+        axios.post("https://wpbackend.garcalia.com/index.php/wp-json/jwt-auth/v1/token", {
+            username: email,
             // email: email,
             password: password
         }).then((response: any) => {
-            // Handle success.
-            console.log('Well done!');
-            console.log('User profile', response.data.user);
-            console.log('User token', response.data.jwt);
-
-            res = { "token": response.data.jwt }
+            console.log(response.data.data.token)
+            res = { "token": response.data.data.token }
         }).catch((error: any) => {
-            res = { "error": error.response.data.error.message }
+            res = { "error": error?.response?.data?.error?.message }
         })
     )
 
