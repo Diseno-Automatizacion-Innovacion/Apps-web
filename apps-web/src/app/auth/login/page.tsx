@@ -11,7 +11,7 @@ export default function Register() {
     useEffect(() => {
         async function loginCall(event: any) {
             if (event?.key != "Enter" && event?.key != undefined) {
-                // console.log(event)
+                // 
                 return
             }
             setFetching(true)
@@ -24,12 +24,12 @@ export default function Register() {
             const email = (document.querySelector("#Email") as HTMLInputElement)?.value
 
             if (!email) {
-                alert("Introduce un email")
+                alert("Introduce un email o usuario")
                 setFetching(false)
                 return
             }
-            if (!validEmail.test(email)) {
-                alert("El email introducido no es valido")
+            if (email.match(avoidEmptyStrings)) {
+                alert("El usuario no puede contener espacios")
                 setFetching(false)
                 return
             }
@@ -77,8 +77,7 @@ export default function Register() {
             {/* <Navigation></Navigation> */}
             <div id="container" className="flex justify-center items-center h-screen bg-slate-900">
                 <div className="flex flex-col gap-2 justify-center items-center w-[40vw] aspect-[1.61803398875] bg-slate-600 rounded">
-                    {/* <input type="text" id="User" className="rounded p-2 text-center" placeholder="User" /> */}
-                    <input type="email" id="Email" className="rounded p-2 text-center" placeholder="Email" />
+                    <input type="email" id="Email" className="rounded p-2 text-center" placeholder="Email o usuario" />
                     <input type="password" id="Password" className="rounded p-2 text-center" placeholder="Password" />
                     <input type="button" disabled={fetching} id="Register" className="cursor-pointer p-2 bg-slate-500 rounded" value={fetching ? "Espere..." : "Iniciar sesion"} />
                 </div>

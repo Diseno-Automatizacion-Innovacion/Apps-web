@@ -18,7 +18,7 @@ export default function Juego({ params }: { params: { slug: string } }) {
                     "query": params.slug
                 })
             })).json()
-            // console.log("Prueba: " + JSON.stringify(data.data[0].attributes.comments))
+            // 
             document.title = "apps-web - " + data?.data[0]?.attributes?.Titulo
             if (!data?.data[0]?.attributes?.Titulo) {
                 router.push("/juegos")

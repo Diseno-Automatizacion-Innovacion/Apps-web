@@ -11,7 +11,7 @@ export default function Register() {
     useEffect(() => {
         async function registerCall(event: any) {
             if (event?.key != "Enter" && event?.key != undefined) {
-                // console.log(event)
+                // 
                 return
             }
             setFetching(true)
@@ -84,15 +84,37 @@ export default function Register() {
                 })
             })).json()
 
+            console.log("Data:", data)
             if (data?.error) {
                 alert(data.error)
                 setFetching(false)
                 return
             }
 
-            if (data?.token) {
-                localStorage.setItem("token", data?.token)
-                router.push("/")
+            if (data?.statusText == "Created") {
+                // alert("Creado :D")
+                const data2 = await (await fetch('/api/auth/login', {
+                    method: "POST",
+                    body: JSON.stringify({
+                        // "user": user,
+                        "email": email,
+                        "password": password
+                    })
+                })).json()
+
+                if (data2?.error) {
+                    alert(data2.error)
+                    localStorage.removeItem("token")
+                    setFetching(false)
+                    return
+                }
+
+                if (data2?.token) {
+                    localStorage.setItem("token", data2?.token)
+                    router.push("/")
+                }
+                // localStorage.setItem("token", data?.token)
+                // router.push("/")
             }
 
         }

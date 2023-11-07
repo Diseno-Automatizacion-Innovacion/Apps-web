@@ -41,7 +41,7 @@ export default function Nav() {
         }
         function scroll() {
             if (window.scrollY != 0) {
-                // console.log(window.scrollY)
+                // 
                 document.querySelector("#header")?.setAttribute("style", "box-shadow: 0px 2px 0px 0px rgba(0,0,255);")
             }
             else {
@@ -67,7 +67,7 @@ export default function Nav() {
                 </ul>
                 <ul className='flex flex-row gap-2 m-auto mr-2'>
                     {
-                        !login?.username ?
+                        !login?.name ?
                             <>
                                 <li className={navItemsClass + ""}>
                                     <Link href="/auth/register">Crear usuario</Link>
@@ -79,7 +79,7 @@ export default function Nav() {
                             :
                             <>
                                 <li className={navItemsClass}>
-                                    {obtenerSaludo()}, {login.username}
+                                    {obtenerSaludo()}, {login.name}
                                 </li>
                             </>
                     }
