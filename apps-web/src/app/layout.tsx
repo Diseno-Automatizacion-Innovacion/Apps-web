@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'apps-web',
-  description: 'apps-web portal de mods',
+  title: 'Modink | Portal de Mods',
+  description: 'Modink portal de mods',
 }
 
 export default function RootLayout({

@@ -21,9 +21,9 @@ export default function Home() {
     <div className='bg-slate-900'>
       <Navigation></Navigation>
 
-      <IndexTitle title="Modink" secondTitle="Portal mods"></IndexTitle>
+      <IndexTitle title="Modink" secondTitle="Portal de Mods"></IndexTitle>
 
-      <div className="flex items-center align-middle justify-center mb-10">
+      <div className="flex items-center align-middle justify-center mb-10 mt-10">
         <a id="minecraft" href="/juegos/minecraft" className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 duration-200 hover:shadow-[0_0px_60px_-15px_rgba(255,255,255,0.3)] ease-in-out dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
 
           <Image className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://strapi.garcalia.com/uploads/download_815f3c00e7.jpg" alt="Minecraft" width={1920} height={1080} />
@@ -37,7 +37,7 @@ export default function Home() {
             </p>
           </div>
         </a>
-        I</div>
+      </div>
     </div>
   )
 }
