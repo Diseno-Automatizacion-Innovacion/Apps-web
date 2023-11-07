@@ -5,7 +5,7 @@ export async function GET() {
 
     let data = await (await fetch("https://strapi.garcalia.com/api/juegos?fields[0]=Titulo&fields[2]=slug")).json()
 
-    console.log(data.data)
+
 
     return NextResponse.json({
         "data": data.data

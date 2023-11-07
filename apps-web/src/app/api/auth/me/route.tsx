@@ -3,7 +3,7 @@ import axios from "axios";
 
 export async function POST(req: NextRequest) {
     const { token } = await req.json() as any
-    // console.log(reqData)
+    // 
     try {
 
         const { data } = await axios.get("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/users/me", {
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(data)
+
         return NextResponse.json({
             "user": data
         })

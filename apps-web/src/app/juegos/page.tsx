@@ -10,7 +10,7 @@ export default function Home() {
     useEffect(() => {
         async function getData() {
             const data = await (await fetch("/api/juegos")).json()
-            // console.log(data.data)
+            // 
             setData(data.data)
         }
 

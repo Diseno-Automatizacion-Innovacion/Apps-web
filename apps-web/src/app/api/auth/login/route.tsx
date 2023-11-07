@@ -5,7 +5,7 @@ import axios from 'axios'
 export async function POST(req: NextRequest) {
     const { email, password } = await req.json()
 
-    console.log(email, password)
+    // console.log(email, password)
 
     let res = {};
 
@@ -15,14 +15,16 @@ export async function POST(req: NextRequest) {
             password: password
 
         }).then((response: any) => {
+            // console.log(response)
             res = { "token": response.data.data.token }
 
         }).catch((error: any) => {
-            res = { "error": error?.response?.data?.error?.message }
+            // console.log(error)
+            res = { "error": error?.response?.data?.message }
         })
     )
 
-    console.log(res)
+    // 
 
     return NextResponse.json(res)
 
