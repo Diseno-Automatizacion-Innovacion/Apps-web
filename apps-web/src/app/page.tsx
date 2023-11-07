@@ -12,9 +12,9 @@ export default function Home() {
   const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 
   useEffect(() => {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      alert("Mejor usa el pc")
-    }
+    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    //   alert("Mejor usa el pc")
+    // }
   }, [])
 
   return (
