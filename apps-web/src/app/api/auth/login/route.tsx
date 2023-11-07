@@ -12,11 +12,11 @@ export async function POST(req: NextRequest) {
     await (
         axios.post("https://wpbackend.garcalia.com/index.php/wp-json/jwt-auth/v1/token", {
             username: email,
-            // email: email,
             password: password
+
         }).then((response: any) => {
-            console.log(response.data.data.token)
             res = { "token": response.data.data.token }
+
         }).catch((error: any) => {
             res = { "error": error?.response?.data?.error?.message }
         })
