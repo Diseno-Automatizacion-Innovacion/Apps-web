@@ -33,6 +33,7 @@ export default function Home() {
       {juegos.map((juego: any, i: number) => {
         return <GameTag key={i} slug={juego?.attributes?.slug} />
       })}
+      <GameTag slug="metal-gear" />
     </div>
   )
 }

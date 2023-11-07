@@ -7,6 +7,12 @@ const nextConfig = {
                 hostname: "strapi.garcalia.com",
                 port: "",
                 pathname: "/**"
+            },
+            {
+                protocol: "https",
+                hostname: "wpbackend.garcalia.com",
+                port: "",
+                pathname: "/**"
             }
         ]
     }

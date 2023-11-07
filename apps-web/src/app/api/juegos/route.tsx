@@ -3,9 +3,7 @@ import { NextResponse, NextRequest } from 'next/server'
 /* ----------------------------- Lista de juegos ---------------------------- */
 export async function GET() {
 
-    let data = await (await fetch("https://strapi.garcalia.com/api/juegos?fields[0]=Titulo&fields[2]=slug")).json()
-
-
+    let data = await (await fetch("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/posts?_field=Titulo,slug")).json()
 
     return NextResponse.json({
         "data": data.data

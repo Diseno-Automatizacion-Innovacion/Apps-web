@@ -27,7 +27,6 @@ export default function Home() {
                             <a className='text-white' href={`/juegos/${el.attributes.slug}`} id={el.id} key={el.id}>
                                 <div>{el.attributes.Titulo}</div>
                             </a>
-
                         )
                     })
                 }
