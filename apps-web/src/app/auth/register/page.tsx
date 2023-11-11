@@ -128,7 +128,7 @@ export default function Register() {
         <>
             {/* <Navigation></Navigation> */}
             <div id="container" className="flex justify-center items-center h-screen bg-slate-900">
-                <div className="flex flex-col gap-2 justify-center items-center w-[40vw] aspect-[1.61803398875] bg-slate-600 rounded">
+                <div className="flex flex-col gap-2 justify-center items-center sm:w-[40vw] h-[60vh] sm:aspect-[1.61803398875] aspect-[9/16] bg-slate-600 rounded">
                     <input type="text" id="User" className="rounded p-2 text-center" placeholder="User" />
                     <input type="email" id="Email" className="rounded p-2 text-center" placeholder="Email" />
                     <input type="password" id="Password" className="rounded p-2 text-center" placeholder="Password" />

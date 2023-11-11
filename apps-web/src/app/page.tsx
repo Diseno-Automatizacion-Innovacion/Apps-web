@@ -15,9 +15,6 @@ export default function Home() {
   const [juegos, setJuegos] = useState([] as any)
 
   useEffect(() => {
-    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    //   alert("Mejor usa el pc")
-    // }
     async function getJuegos() {
       const data = await (await fetch("/api/juegos")).json()
       console.log(data.data)
@@ -30,10 +27,12 @@ export default function Home() {
     <div className='bg-slate-900'>
       <Navigation></Navigation>
       <IndexTitle title="Modink" secondTitle="Portal de Mods"></IndexTitle>
-      {juegos.map((juego: any, i: number) => {
+
+      {juegos?.map((juego: any, i: number) => {
         return <GameTag key={i} slug={juego?.attributes?.slug} />
       })}
-      <GameTag slug="metal-gear" />
+
+      <GameTag slug="minecraft" />
     </div>
   )
 }
