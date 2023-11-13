@@ -17,8 +17,8 @@ export default function Home() {
   useEffect(() => {
     async function getJuegos() {
       const data = await (await fetch("/api/juegos")).json()
-      console.log(data.data)
-      setJuegos(data.data)
+      console.log(data?.juegos)
+      setJuegos(data?.juegos)
     }
     getJuegos()
   }, [])
@@ -29,10 +29,10 @@ export default function Home() {
       <IndexTitle title="Modink" secondTitle="Portal de Mods"></IndexTitle>
 
       {juegos?.map((juego: any, i: number) => {
-        return <GameTag key={i} slug={juego?.attributes?.slug} />
+        return <GameTag key={i} slug={juego?.slug} name={juego?.name} count={juego?.count} />
       })}
 
-      <GameTag slug="minecraft" />
+      {/* <GameTag slug="minecraft" /> */}
     </div>
   )
 }
