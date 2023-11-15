@@ -20,9 +20,9 @@ export default function Home() {
     return (
         <div>
             <Navigation></Navigation>
-            <main className='absolute top-23 m-5'>
+            <main className='flex sm:flex-row-reverse flex-col gap-3 absolute top-20 m-3'>
                 {juegos?.map((juego: any, i: number) => {
-                    return <GameTag key={i} slug={juego?.slug} />
+                    return <GameTag key={i} slug={juego?.slug} name={juego?.name} count={juego?.count} />
                 })}
             </main>
         </div>

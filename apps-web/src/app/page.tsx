@@ -31,8 +31,6 @@ export default function Home() {
       {juegos?.map((juego: any, i: number) => {
         return <GameTag key={i} slug={juego?.slug} name={juego?.name} count={juego?.count} />
       })}
-
-      {/* <GameTag slug="minecraft" /> */}
     </div>
   )
 }

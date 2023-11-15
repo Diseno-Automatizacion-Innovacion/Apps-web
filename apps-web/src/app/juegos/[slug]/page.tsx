@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import Navigation from '@/app/components/Navigation'
@@ -9,7 +10,10 @@ import Navigation from '@/app/components/Navigation'
 export default function Juego({ params }: { params: { slug: string } }) {
 
     const router = useRouter()
-    const [data, setData] = useState([] as any)
+
+    const [mods, setMods] = useState([] as any)
+    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         async function getData() {
             const data = await (await fetch("/api/juegos", {
@@ -19,11 +23,9 @@ export default function Juego({ params }: { params: { slug: string } }) {
                 })
             })).json()
             // 
-            document.title = "apps-web - " + data?.data[0]?.attributes?.Titulo
-            if (!data?.data[0]?.attributes?.Titulo) {
-                router.push("/juegos")
-            }
-            setData(data.data)
+            document.title = "apps-web - " + params.slug
+            setMods(data.data)
+            setLoading(false)
         }
         getData()
     }, [params.slug, router])
@@ -31,28 +33,28 @@ export default function Juego({ params }: { params: { slug: string } }) {
     return (
         <>
             <Navigation></Navigation>
-            <div className='absolute top-24'>
-                {
-                    data.map((el: any, i: number) => {
-                        return (
-                            <>
-                                <Image className='w-10 h-10' src={`https://strapi.garcalia.com${el?.attributes?.cover?.data?.attributes?.url || ""}`} alt={"Imagen " + params.slug} width={1920} height={1080}></Image>
-                                <div id='Body'>{el?.attributes?.Body}</div>
-                                <div id='Comments' className='text-white'>{
-                                    el?.attributes?.comments?.data.map((el: any) => {
-                                        return (
-                                            <>
-                                                <div id='user'>{el.attributes.user}:</div>
-                                                <div id='message'>{el.attributes.message}</div>
-                                            </>
-                                        )
-                                    })
-                                }</div>
-                            </>
-                        )
-                    })
+            <div className='absolute text-white top-24'>
+                {!loading ?
+                    mods?.mods?.length > 0 ?
+                        mods?.mods?.map((el: any, i: number) => {
+                            return (
+                                <>
+                                    <Image className='w-10 h-10' src={`https://wpbackend.garcalia.com/index.php/wp-content/uploads/${params.slug}.jpg`} alt={"Imagen: " + params.slug} width={1920} height={1080}></Image>
+                                    <br />
+                                    <div id='Descripcion'>{mods.descripcion || "No hay descripcion"}</div>
+                                    <div id='Mods'></div>
+                                </>
+                            )
+                        })
+                        :
+                        <>
+                            <div>Parece que esta categoria todavia no tiene mods o no existe</div>
+                            <Link href="/juegos">Volver</Link>
+                        </>
+                    :
+                    <div>Cargando, por favor espere</div>
                 }
-            </div>
+            </div >
         </>
     )
 }
