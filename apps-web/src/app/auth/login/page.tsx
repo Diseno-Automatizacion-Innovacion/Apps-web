@@ -52,7 +52,7 @@ export default function Register() {
                     "password": password
                 })
             })).json()
-
+            console.log(data)
             if (data?.error) {
                 alert(data.error)
                 localStorage.removeItem("token")
@@ -61,6 +61,7 @@ export default function Register() {
             }
 
             if (data?.token) {
+                console.log("hola")
                 localStorage.setItem("token", data?.token)
                 router.push("/")
             }

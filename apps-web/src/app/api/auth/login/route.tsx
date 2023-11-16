@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
             password: password
 
         }).then((response: any) => {
-            // console.log(response)
+            console.log(response)
             res = { "token": response.data.data.token }
 
         }).catch((error: any) => {
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         })
     )
 
-    // 
+    // console.log(res)
 
     return NextResponse.json(res)
 
