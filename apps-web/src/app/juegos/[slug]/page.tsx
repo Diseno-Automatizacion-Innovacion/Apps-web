@@ -40,12 +40,10 @@ export default function Juego({ params }: { params: { slug: string } }) {
                 {!loading ?
                     mods?.mods?.length > 0 ?
                         <>
-                            {/* <Image className='w-10 h-10' src={`https://wpbackend.garcalia.com/index.php/wp-content/uploads/${params.slug}.jpg`} alt={"Imagen: " + params.slug} width={1920} height={1080}></Image> */}
-                            {/* <br /> */}
                             {/* TODO: Acuerdate de cambiar esto para que no de puto asco :D */}
                             <IndexTitle title={params.slug.split('-').map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1)).join(' ')} secondTitle="Mods"></IndexTitle>
                             {/* <div id='Descripcion'>{mods.descripcion || "No hay descripcion"}</div> */}
-                            <div id='Mods'>
+                            <div id='Mods' className='flex flex-col items-center'>
                                 {
                                     mods?.mods?.map((el: any, i: number) => {
                                         return (

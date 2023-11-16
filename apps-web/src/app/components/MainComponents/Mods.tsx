@@ -22,7 +22,7 @@ export default function Mods(props: any) {
     })
 
     return (
-        <div className="border border-slate-500 p-3">
+        <div className="border border-slate-500 p-3 w-[80vw]">
             {
                 Object.keys(login).length > 0 ?
                     <>
