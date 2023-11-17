@@ -22,7 +22,7 @@ export default function Mods(props: any) {
     })
 
     return (
-        <div className="border border-slate-500 p-3 w-[80vw]">
+        <div className="border text-slate-400 bg-slate-950 border-slate-500 rounded-xl p-3 w-[80vw]">
             {
                 Object.keys(login).length > 0 ?
                     <>
@@ -35,8 +35,8 @@ export default function Mods(props: any) {
                     </>
                     :
                     <>
-                        <div className="font-bold text-center">
-                            Inicia sesion para visualizar el contenido
+                        <div className="text-center">
+                            Inicia sesion para visualizar el contenido 😭
                         </div>
                     </>
             }
