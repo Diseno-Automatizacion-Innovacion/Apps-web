@@ -25,7 +25,7 @@ export default function Juego({ params }: { params: { slug: string } }) {
                 })
             })).json()
             // 
-            document.title = "apps-web - " + params.slug
+            document.title = "Modink | " + params.slug.split('-').map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1)).join(' ')
             setMods(data.data)
             setLoading(false)
         }
@@ -46,9 +46,10 @@ export default function Juego({ params }: { params: { slug: string } }) {
                             <div id='Mods' className='flex flex-col items-center'>
                                 {
                                     mods?.mods?.map((el: any, i: number) => {
+                                        console.log(el?.author)
                                         return (
                                             <div key={i}>
-                                                <Mods title={el?.title?.rendered} descripcion={el?.content?.rendered}></Mods>
+                                                <Mods title={el?.title?.rendered} body={el?.excerpt?.rendered}></Mods>
                                                 <br />
                                             </div>
                                         )
