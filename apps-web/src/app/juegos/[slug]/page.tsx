@@ -42,8 +42,9 @@ export default function Juego({ params }: { params: { slug: string } }) {
                         <>
                             {/* TODO: Acuerdate de cambiar esto para que no de puto asco :D */}
                             <IndexTitle title={params.slug.split('-').map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1)).join(' ')} secondTitle="Mods"></IndexTitle>
-                            <div id='Descripcion'>{mods.descripcion || "No hay descripcion"}</div>
+
                             <div id='Mods' className='flex flex-col items-center'>
+                                <div className="border font-bold justify-center p-3 rounded-xl border-slate-500 text-gray-300 bg-slate-900 m-8" id='Descripcion'>{mods.descripcion || "No hay descripcion"}</div>
                                 {
                                     mods?.mods?.map((el: any, i: number) => {
                                         console.log(el?.author)
