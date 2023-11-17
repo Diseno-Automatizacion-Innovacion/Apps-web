@@ -2,9 +2,11 @@
 import { get } from "http"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation";
 
 export default function Nav() {
     const navItemsClass = "hover:text-blue-700 duration-200 ease-in-out p-1"
+    const router = useRouter()
 
     const [login, setLogin] = useState({} as any)
 
@@ -34,7 +36,7 @@ export default function Nav() {
                     body: JSON.stringify({ "token": token })
                 })).json()
                 if (data?.error == "Nope") {
-                    localStorage.removeItem("token")
+                    router.refresh()
                 }
                 setLogin(data.user)
             }
@@ -78,7 +80,12 @@ export default function Nav() {
                             </>
                             :
                             <>
-                                <li className={navItemsClass}>
+                                <li className={navItemsClass} onClick={() => {
+                                    if (confirm("Cerrar sesion?")) {
+                                        localStorage.removeItem("token")
+                                        window.location.reload()
+                                    }
+                                }}>
                                     {obtenerSaludo()}, {login.name}
                                 </li>
                             </>
