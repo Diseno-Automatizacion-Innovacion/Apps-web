@@ -18,7 +18,13 @@ export default function Mods(props: any) {
                 setLogin(data.user)
             }
         }
+        async function getUsers() {
+            const token = localStorage.getItem('token')
+        }
         getLogin()
+        if (Object.keys(login).length > 0) {
+
+        }
     })
 
     return (
@@ -30,7 +36,7 @@ export default function Mods(props: any) {
                             {props.title}
                         </div>
                         <div id="description">
-                            {props.body}
+                            {props.body.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")}
                         </div>
                     </>
                     :
