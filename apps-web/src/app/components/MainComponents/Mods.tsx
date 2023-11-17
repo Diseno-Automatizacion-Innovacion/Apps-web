@@ -25,7 +25,7 @@ export default function Mods(props: any) {
         if (Object.keys(login).length > 0) {
 
         }
-    })
+    }, [])
 
     return (
         <div className="border text-slate-400 bg-slate-950 border-slate-500 rounded-xl p-3 w-[80vw]">
