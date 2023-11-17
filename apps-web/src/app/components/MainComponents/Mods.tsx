@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+
+import imagen from "../../../../public/download.svg"
 
 export default function Mods(props: any) {
 
@@ -30,10 +34,10 @@ export default function Mods(props: any) {
         }
         getLogin()
         getUser()
-    }, [])
+    }, [props.id])
 
     return (
-        <div className="border text-slate-400 bg-slate-950 border-slate-500 rounded-xl p-3 w-[80vw]">
+        <Link href={`/juegos/${props.parentSlug}/${props.slug}`} className="flex duration-200 cursor-pointer ease-in-out hover:shadow-[0_0px_50px_rgba(8,_112,_184,_0.7)] flex-col border text-slate-400 bg-slate-950 border-slate-500 rounded-xl p-3 w-[80vw]">
             {
                 Object.keys(login).length > 0 ?
                     <>
@@ -43,9 +47,9 @@ export default function Mods(props: any) {
                         <div id="description">
                             {props.body.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")}
                         </div>
-                        <div id="author" className="text-right pr-2 pl-2 text-slate-300 bg-slate-900 p-1 rounded-xl border border-slate-400">
+                        <span id="author" className="self-end mt-1 w-fit pr-2 pl-2 text-slate-300 bg-slate-900 p-1 rounded-xl border border-slate-400">
                             {author?.name}
-                        </div>
+                        </span>
                     </>
                     :
                     <>
@@ -54,6 +58,6 @@ export default function Mods(props: any) {
                         </div>
                     </>
             }
-        </div>
+        </Link>
     )
 }

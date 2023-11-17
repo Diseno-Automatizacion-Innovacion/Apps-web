@@ -39,8 +39,8 @@ export async function POST(req: NextRequest) {
         }
     }
 
-    let retrieve = await (await fetch(`https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/posts`)).json()
-    // console.log(categoryId)
+    let retrieve = await (await fetch(`https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/posts?_fields=slug,title,author,excerpt,categories`)).json()
+    // console.log(retrieve)
     let mods = retrieve.filter((post: any) => post?.categories.includes(categoryId))
     // console.log(mods)
 
