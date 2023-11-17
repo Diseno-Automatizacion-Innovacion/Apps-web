@@ -23,7 +23,7 @@ export default function Mods(props: any) {
             const token = localStorage.getItem('token')
             const data = await (await fetch("/api/users", {
                 method: "POST",
-                body: JSON.stringify({ "token": token })
+                body: JSON.stringify({ "token": token, "userId": props.id })
             })).json()
             console.log(data)
             setAuthor(data?.data)
@@ -43,7 +43,7 @@ export default function Mods(props: any) {
                         <div id="description">
                             {props.body.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")}
                         </div>
-                        <div id="author" className="float-right">
+                        <div id="author" className="text-right pr-2 pl-2 text-slate-300 bg-slate-900 p-1 rounded-xl border border-slate-400">
                             {author?.name}
                         </div>
                     </>
