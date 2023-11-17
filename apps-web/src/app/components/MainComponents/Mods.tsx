@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 export default function Mods(props: any) {
 
     const [login, setLogin] = useState({} as any)
+    const [author, setAuthor] = useState({ name: "Cargando..." } as any)
 
     useEffect(() => {
         async function getLogin() {
@@ -18,14 +19,18 @@ export default function Mods(props: any) {
                 setLogin(data.user)
             }
         }
-        async function getUsers() {
+        async function getUser() {
             const token = localStorage.getItem('token')
+            const data = await (await fetch("/api/users", {
+                method: "POST",
+                body: JSON.stringify({ "token": token })
+            })).json()
+            console.log(data)
+            setAuthor(data?.data)
         }
         getLogin()
-        if (Object.keys(login).length > 0) {
-
-        }
-    })
+        getUser()
+    }, [])
 
     return (
         <div className="border border-slate-500 p-3 w-[80vw]">
@@ -37,6 +42,9 @@ export default function Mods(props: any) {
                         </div>
                         <div id="description">
                             {props.body.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")}
+                        </div>
+                        <div id="author" className="float-right">
+                            {author?.name}
                         </div>
                     </>
                     :

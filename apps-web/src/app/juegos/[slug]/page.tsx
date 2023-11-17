@@ -49,7 +49,7 @@ export default function Juego({ params }: { params: { slug: string } }) {
                                         console.log(el?.author)
                                         return (
                                             <div key={i}>
-                                                <Mods title={el?.title?.rendered} body={el?.excerpt?.rendered}></Mods>
+                                                <Mods slug={el.slug} title={el?.title?.rendered} body={el?.excerpt?.rendered}></Mods>
                                                 <br />
                                             </div>
                                         )
