@@ -49,7 +49,7 @@ export default function Juego({ params }: { params: { slug: string } }) {
                                     mods?.mods?.map((el: any, i: number) => {
                                         return (
                                             <div key={i}>
-                                                <Mods slug={el.slug} id={el?.author} title={el?.title?.rendered} body={el?.excerpt?.rendered}></Mods>
+                                                <Mods parentSlug={params.slug} slug={el.slug} id={el?.author} title={el?.title?.rendered} body={el?.excerpt?.rendered}></Mods>
                                                 <br />
                                             </div>
                                         )
