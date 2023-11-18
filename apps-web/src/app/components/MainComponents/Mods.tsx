@@ -50,7 +50,7 @@ export default function Mods(props: any) {
                     :
                     <>
                         <div className="text-center">
-                            Inicia sesion para visualizar el contenido 😭
+                            Inicia sesion para visualizar el contenido 💩
                         </div>
                     </>
             }
