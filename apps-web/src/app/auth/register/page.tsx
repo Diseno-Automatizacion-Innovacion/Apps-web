@@ -111,7 +111,7 @@ export default function Register() {
 
                 if (data2?.token) {
                     localStorage.setItem("token", data2?.token)
-                    router.push("/")
+                    router.back()
                 }
                 // localStorage.setItem("token", data?.token)
                 // router.push("/")

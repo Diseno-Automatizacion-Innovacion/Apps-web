@@ -63,7 +63,7 @@ export default function Register() {
             if (data?.token) {
                 console.log("hola")
                 localStorage.setItem("token", data?.token)
-                router.push("/")
+                router.back()
             }
 
         }
