@@ -35,13 +35,25 @@ export default function Comment(props: any) {
             setAuthor(data?.data)
         }
         getLogin()
-        getUser()
+        // getUser()
     }, [props.id])
 
     return (
         <>
-            <div className="text-center border rounded-xl p-2">
-                {props?.comment} - {author.name}
+            <div className="flex flex-col border rounded-xl p-2">
+                <div>
+                    <span className="font-bold">
+                        {props?.authorName}
+                    </span>
+                    <span className="tooltip font-light italic float-right">
+                        {props?.date.split(" ")[0]}
+                        <span className="tooltiptext">
+                            {props?.date}
+                        </span>
+                    </span>
+
+                </div>
+                {props?.comment}
             </div>
             <br />
         </>

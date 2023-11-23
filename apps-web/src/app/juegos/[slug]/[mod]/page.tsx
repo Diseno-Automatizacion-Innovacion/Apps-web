@@ -10,11 +10,27 @@ import Nav from "@/app/components/Navigation"
 export default function ModPage({ params }: { params: { mod: string } }) {
     const [mod, setMod] = useState({} as any)
     const [login, setLogin] = useState({} as any)
+    const [comments, setComments] = useState([] as any)
+
     const router = useRouter()
 
     // console.log(Object.keys(mod).length)
 
     // let parent = document.title.replace("Modink | ", "")
+
+    const formatDate = (fechaGMT: string) => {
+        const fechaActual = new Date(fechaGMT);
+
+        const horas = fechaActual.getUTCHours().toString().padStart(2, '0');
+        const minutos = fechaActual.getUTCMinutes().toString().padStart(2, '0');
+        const dia = fechaActual.getUTCDate();
+        const mes = (fechaActual.getUTCMonth() + 1); // Meses van de 0 a 11
+        const anio = fechaActual.getUTCFullYear();
+
+        const fechaFormateada = `${horas}:${minutos} ${dia}/${mes}/${anio}`;
+
+        return fechaFormateada;
+    };
 
     useEffect(() => {
         async function getLogin() {
@@ -33,7 +49,13 @@ export default function ModPage({ params }: { params: { mod: string } }) {
         async function getModInfo() {
             const data = await (await fetch(`/api/mod/${params.mod}`)).json()
             console.log(data)
+            getComments(data?.data?.id)
             setMod(data.data)
+        }
+        async function getComments(id: number) {
+            const data = await (await fetch(`/api/comments/${id}/1`)).json()
+            console.log(data.data)
+            setComments(data.data)
         }
         getLogin()
         getModInfo()
@@ -86,14 +108,20 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                                 <span>Descargar Mod</span>
 
                             </button>
-                            <br />
+
                             <div>
-                                <div className="font-semibold text-3xl">
+                                <div className="font-semibold text-3xl text-center">
                                     Comentarios
                                 </div>
                                 <hr />
                                 <br />
-                                <Comment comment="hola" />
+                                <textarea name="newComment" id="newComment" className="resize-none w-[66vw]" />
+                                {
+                                    comments?.map((comment: any, i: number) => {
+                                        return <Comment key={i} comment={comment?.content?.rendered.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")} authorName={comment?.author_name} date={formatDate(comment?.date_gmt)} />
+                                    })
+                                }
+                                {/* <Comment comment="hola" authorName="Rubeneitor2" date={2} /> */}
                             </div>
                         </div>
                         :
