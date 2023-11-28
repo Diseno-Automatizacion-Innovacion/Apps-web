@@ -60,7 +60,7 @@ export default function Nav() {
             <nav className="flex gap-8">
                 <ul className="flex gap-8 text-l align-middle items-center">
                     <li className={navItemsClass}>
-                        <Link href="/">Nosotros</Link>
+                        <Link href="/">Inicio</Link>
                     </li>
                     <li className={navItemsClass}>
                         <Link href="/juegos">Juegos</Link>

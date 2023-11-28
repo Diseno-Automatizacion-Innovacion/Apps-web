@@ -72,14 +72,10 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                             <div className="font-bold text-6xl">
                                 {mod?.title?.rendered}
                             </div>
-                            <div className="text-center w-[20%] justify-center border rounded-xl bg-slate-950">
+                            <div className="text-center min-w-[20%] justify-center border rounded-xl bg-slate-950 max-w-fit">
                                 <div className="p-2">
                                     {mod?.excerpt?.rendered.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")}
                                 </div>
-                            </div>
-
-                            <div className=" bg-blue-300 w-[30%] aspect-[16/9]">
-
                             </div>
 
                             <button className="align-center bg-gray-500 hover:bg-gray-600 text-gray-950 font-bold py-2 px-4 rounded-xl inline-flex align-items-center" onClick={async () => {
@@ -115,7 +111,15 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                                 </div>
                                 <hr />
                                 <br />
-                                <textarea name="newComment" id="newComment" className="resize-none w-[66vw]" />
+                                <div className="flex justify-center">
+                                    <textarea name="newComment" placeholder="Escribe tu comentario..." id="newComment" className="text-slate-300 border border-slate-300 rounded-xl bg-slate-700 resize-none w-[60vw] p-2 h-20" />
+                                    <button className="h-[10%] left-[-63px] top-[55px] relative items-center w-20 hover:bg-slate-800 duration-150 justify-center flex text-center bg-slate-900 border-slate-300 border p-2 rounded-xl">
+                                        Enviar
+                                    </button>
+                                </div>
+
+                                <br />
+
                                 {
                                     comments?.map((comment: any, i: number) => {
                                         return <Comment key={i} comment={comment?.content?.rendered.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")} authorName={comment?.author_name} date={formatDate(comment?.date_gmt)} />
@@ -130,7 +134,7 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                         </div>
                     :
                     <div className="flex items-center w-screen h-screen justify-center text-white font-bold">
-                        Inicia sesion, por favor, matao
+                        Inicie sesion, por favor
                     </div>
             }
         </>

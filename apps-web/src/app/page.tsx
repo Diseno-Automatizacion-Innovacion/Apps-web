@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     async function getJuegos() {
-      const data = await (await fetch("/api/juegos")).json()
+      const data = await (await fetch("/api/juegos")).json().catch(() => { })
       console.log(data?.juegos)
       setJuegos(data?.juegos)
     }
