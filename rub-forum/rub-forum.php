@@ -24,6 +24,7 @@ function rub_forum_activation()
     $sql_categories = "CREATE TABLE $categories_table (
         category_id INT AUTO_INCREMENT PRIMARY KEY,
         category_name VARCHAR(255) NOT NULL,
+        category_description TEXT NOT NULL,
         author BIGINT UNSIGNED NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (author) REFERENCES wp_users(ID)
@@ -109,10 +110,17 @@ function rub_forum_categories_endpoint_handler($request)
 
         if ($userId !== 0) {
             $name = sanitize_text_field($data['name']);
+            $description = sanitize_text_field($data['description']);
 
             if ($name == null) {
                 wp_send_json(array(
-                    'error' => "Hubo un error procesando la informacion"
+                    'error' => 'Falta nombre del tema'
+                ));
+            }
+
+            if ($description == null) {
+                wp_send_json(array(
+                    'error' => 'Falta descripcion del tema'
                 ));
             }
 
@@ -120,6 +128,7 @@ function rub_forum_categories_endpoint_handler($request)
                 $table,
                 array(
                     'category_name' => $name,
+                    'category_description' => $description,
                     'author' => $userId
                 )
             );
