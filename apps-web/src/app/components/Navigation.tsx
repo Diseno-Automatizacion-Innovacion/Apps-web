@@ -65,7 +65,9 @@ export default function Nav() {
                     <li className={navItemsClass}>
                         <Link href="/juegos">Juegos</Link>
                     </li>
-
+                    <li className={navItemsClass}>
+                        <Link href="/foro">Foro</Link>
+                    </li>
                 </ul>
                 <ul className='flex flex-row gap-2 m-auto mr-2'>
                     {
