@@ -16,7 +16,6 @@ export default function Forum() {
 
             console.log("hola")
             const data = await (await fetch(`/api/foro/categories`)).json()
-
         }
         getTema()
     }, [])
