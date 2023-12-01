@@ -8,7 +8,8 @@ export async function POST(req: NextRequest) {
     console.log(comment, postId, token)
 
     let error = {} as any
-    const data = await axios.post("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/comments", {
+    let response = {} as any
+    await (axios.post("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/comments", {
         "content": comment,
         "post": postId,
         "status": "approve"
@@ -16,20 +17,24 @@ export async function POST(req: NextRequest) {
         headers: {
             "Authorization": `Bearer ${token}`
         }
+    }).then(d => {
+        response = d
+        console.log(d)
     }).catch((e: AxiosError) => {
         error = e
-        console.log(e.cause, e)
-    })
 
-    const response = (data as any).data
-    if (error) {
+    }))
+
+    console.log(response.data, error)
+
+    if (Object.keys(error).length > 0) {
         return NextResponse.json({
-            error
+            "error": error.response.data.message
         })
     }
-    else
-        return NextResponse.json({
-            response
-        })
+
+    return NextResponse.json(
+        response.data
+    )
 
 }
