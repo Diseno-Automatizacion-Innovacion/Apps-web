@@ -11,12 +11,7 @@ export default function Forum() {
         async function getTema() {
             const token = localStorage.getItem("token")
             if (token) {
-                const data = await (await fetch("/api/foro", {
-
-                })).json()
-            }
-            else {
-
+                const data = await (await fetch(`/api/foro/categories`)).json()
             }
         }
     }, [])
