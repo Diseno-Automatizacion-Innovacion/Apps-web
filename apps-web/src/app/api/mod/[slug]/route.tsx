@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
 
     let retrieve = await (await fetch(`https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/posts?_fields=slug,title,author,excerpt,categories,id`)).json()
     // console.log(retrieve)
-    let mods = retrieve.filter((post: any) => post?.slug.includes(slug))
+    let mods = retrieve.filter((post: any) => post?.slug == slug)
     // console.log(mods)
 
     return NextResponse.json({

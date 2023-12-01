@@ -5,6 +5,9 @@ export async function POST(req: NextRequest) {
     const id = req.url.split("/")[5]
     const { comment, postId, token } = await req.json()
 
+    console.log(comment, postId, token)
+
+    let error = {} as any
     const data = await axios.post("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/comments", {
         "content": comment,
         "post": postId,
@@ -13,12 +16,20 @@ export async function POST(req: NextRequest) {
         headers: {
             "Authorization": `Bearer ${token}`
         }
-    }).catch((e: AxiosError) => console.log(e.cause))
+    }).catch((e: AxiosError) => {
+        error = e
+        console.log(e.cause, e)
+    })
 
     const response = (data as any).data
-
-    return NextResponse.json({
-        response
-    })
+    if (error) {
+        return NextResponse.json({
+            error
+        })
+    }
+    else
+        return NextResponse.json({
+            response
+        })
 
 }

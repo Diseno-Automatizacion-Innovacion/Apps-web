@@ -6,11 +6,13 @@ import Image from "next/image"
 
 import Comment from "@/app/components/MainComponents/Comment"
 import Nav from "@/app/components/Navigation"
+import { send } from "process"
 
 export default function ModPage({ params }: { params: { mod: string } }) {
     const [mod, setMod] = useState({} as any)
     const [login, setLogin] = useState({} as any)
     const [comments, setComments] = useState([] as any)
+    const [commentSend, setCommentSend] = useState(false)
 
     const router = useRouter()
 
@@ -112,17 +114,74 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                                 <hr />
                                 <br />
                                 <div className="flex justify-center">
-                                    <textarea name="newComment" placeholder="Escribe tu comentario..." id="newComment" className="text-slate-300 border border-slate-300 rounded-xl bg-slate-700 resize-none w-[60vw] p-2 h-20" />
-                                    <button className="h-[10%] left-[-63px] top-[55px] relative items-center w-20 hover:bg-slate-800 duration-150 justify-center flex text-center bg-slate-900 border-slate-300 border p-2 rounded-xl">
-                                        Enviar
-                                    </button>
+                                    <textarea name="newComment" placeholder="Escribe tu comentario..." id="newComment" className="text-slate-300 border border-slate-300 rounded-xl bg-slate-700 resize-none w-[60vw] p-2 h-20" onChange={async e => {
+
+                                        const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+
+                                        const written = e.target.value
+                                        const sendButton = document.querySelector("#send")
+                                        // if (sendButton && !written) {
+
+                                        //     const keyframes = {
+                                        //         opacity: [1, 0]
+                                        //     };
+
+                                        //     const opciones = {
+                                        //         duration: 100,
+                                        //         fillMode: 'forwards'
+                                        //     };
+
+                                        //     await sendButton.animate(keyframes, opciones).finished
+                                        //     // await sleep(500)
+
+                                        // }
+
+                                        setCommentSend(Boolean(written))
+                                    }} />
+                                    {
+                                        commentSend ?
+                                            <button id="send" className="animation-fade-in h-[10%] left-[-63px] top-[55px] relative items-center w-20 hover:bg-slate-800 duration-150 justify-center flex text-center bg-slate-900 border-slate-300 border p-2 rounded-xl" onClick={async (e) => {
+                                                (e.target as HTMLInputElement).value = ""
+                                                async function getComments(id: number) {
+                                                    const data = await (await fetch(`/api/comments/${id}/1`)).json()
+                                                    console.log(data.data)
+                                                    setComments(data.data)
+                                                }
+                                                const data = await (await fetch(`/api/comments/${mod.id}`, {
+                                                    method: "POST",
+                                                    body: JSON.stringify({
+                                                        "comment": (document.querySelector("#newComment") as HTMLInputElement)?.value,
+                                                        "postId": mod.id,
+                                                        "token": localStorage.getItem("token")
+                                                    })
+                                                })).json()
+
+                                                if (data.error) {
+                                                    alert(data.error.data.message)
+                                                    return
+                                                }
+
+                                                if (data.response) {
+                                                    console.log(data.response)
+                                                    let newComments = comments
+                                                    newComments.push(data.response)
+
+                                                    setComments(newComments)
+                                                    console.log(comments)
+                                                }
+                                            }}>
+                                                Enviar
+                                            </button>
+                                            :
+                                            <div className="h-10% left-[-63%] top-[55px] relative w-20"></div>
+                                    }
                                 </div>
 
                                 <br />
 
                                 {
                                     comments?.map((comment: any, i: number) => {
-                                        return <Comment key={i} comment={comment?.content?.rendered.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "")} authorName={comment?.author_name} date={formatDate(comment?.date_gmt)} />
+                                        return <Comment key={i} comment={comment?.content?.rendered.replace(/\<[A-z]+\>|\<\/[A-z]+\>/g, "").replace(/\<[A-z]+ \/\>/g, "\n")} authorName={comment?.author_name} date={formatDate(comment?.date_gmt)} />
                                     })
                                 }
                                 {/* <Comment comment="hola" authorName="Rubeneitor2" date={2} /> */}
@@ -139,4 +198,8 @@ export default function ModPage({ params }: { params: { mod: string } }) {
             }
         </>
     )
+}
+
+const styles = {
+    "display": "hidden"
 }

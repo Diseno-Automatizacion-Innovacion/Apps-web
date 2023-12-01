@@ -29,6 +29,24 @@
   z-index: 1;
 }
 
+.animation-fade-in {
+  animation-name: fade-in;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-duration: 100ms;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
