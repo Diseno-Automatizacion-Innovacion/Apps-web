@@ -4,7 +4,7 @@ import axios from "axios";
 export async function GET(req: NextRequest) {
 
     let temas = await (await fetch(`https://wpbackend.garcalia.com/index.php/wp-json/rub-forum/v1/categories`)).json()
-
+    console.log(temas)
     return NextResponse.json({
         temas
     })
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }).catch((e) => {
         console.log(e)
     })
-    console.log(postInfo)
+    // console.log(postInfo)
     return NextResponse.json({
         postInfo
     })

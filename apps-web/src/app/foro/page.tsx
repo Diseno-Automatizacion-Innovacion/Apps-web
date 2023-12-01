@@ -14,9 +14,9 @@ export default function Forum() {
         async function getTema() {
             const token = localStorage.getItem("token")
 
-            console.log("hola")
-            const data = await (await fetch(`/api/foro/categories`)).json()
 
+            const data = await (await fetch(`/api/forum/categories/`)).json()
+            setCategories(data.temas)
         }
         getTema()
     }, [])
@@ -27,7 +27,7 @@ export default function Forum() {
             <div id="temas">
                 {
                     categories?.map((category: any, i: number) => {
-                        return <Tema key={category.category_id} id={category.category_id} titulo={category?.category_name} descripcion={category?.category_description}></Tema>
+                        return <Tema key={category.category_id} id={category.category_id} title={category?.category_name} descripcion={category?.category_description}></Tema>
                     })
                 }
             </div>
