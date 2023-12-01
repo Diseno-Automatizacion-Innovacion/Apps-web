@@ -18,6 +18,7 @@ export default function Forum() {
                 console.log(data)
             }
         }
+        getTema()
     }, [])
     return (
         <>
