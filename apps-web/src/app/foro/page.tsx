@@ -13,11 +13,12 @@ export default function Forum() {
     useEffect(() => {
         async function getTema() {
             const token = localStorage.getItem("token")
-            if (token) {
-                const data = await (await fetch(`/api/foro/categories`)).json()
-                console.log(data)
-            }
+
+            console.log("hola")
+            const data = await (await fetch(`/api/foro/categories`)).json()
+
         }
+        getTema()
     }, [])
     return (
         <>

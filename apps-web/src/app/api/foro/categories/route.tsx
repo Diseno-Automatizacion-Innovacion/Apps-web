@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
     }).catch((e) => {
         console.log(e)
     })
+    console.log(postInfo)
     return NextResponse.json({
         postInfo
     })
