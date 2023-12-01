@@ -19,12 +19,12 @@ export async function POST(req: NextRequest) {
     const slug = req.url.split("/")[5]
     console.log(slug)
     const props = await req.json()
-    let categorie
+    let category
 
     let categories = await (await fetch("https://wpbackend.garcalia.com/index.php/wp-json/wp/v2/categories?_fields=slug,id,count,name,description")).json().catch(e => { })
     for (let i = 0; i < categories.length; i++) {
         if (categories[i]?.slug == slug) {
-            categorie = categories[i]?.id
+            category = categories[i]?.id
             break
         }
     }
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         "title": props?.title,
         "content": props?.file,
         "excerpt": props?.description,
-        "categories": [categorie],
+        "categories": [category],
         "status": "publish"
     }, {
         headers: {

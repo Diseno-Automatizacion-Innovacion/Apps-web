@@ -1,18 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 import Comment from "@/app/components/MainComponents/Comment"
 import Nav from "@/app/components/Navigation"
-import { send } from "process"
+
 
 export default function ModPage({ params }: { params: { mod: string } }) {
     const [mod, setMod] = useState({} as any)
     const [login, setLogin] = useState({} as any)
     const [comments, setComments] = useState([] as any)
     const [commentSend, setCommentSend] = useState(false)
+    const [commentLoading, setCommentLoading] = useState(false)
 
     const router = useRouter()
 
@@ -33,6 +34,8 @@ export default function ModPage({ params }: { params: { mod: string } }) {
 
         return fechaFormateada;
     };
+
+
 
     useEffect(() => {
         async function getLogin() {
@@ -114,61 +117,54 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                                 <hr />
                                 <br />
                                 <div className="flex justify-center">
-                                    <textarea name="newComment" placeholder="Escribe tu comentario..." id="newComment" className="text-slate-300 border border-slate-300 rounded-xl bg-slate-700 resize-none w-[60vw] p-2 h-20" onChange={async e => {
-
-                                        const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+                                    <textarea name="newComment" disabled={commentLoading} placeholder="Escribe tu comentario..." id="newComment" className="text-slate-300 border border-slate-300 rounded-xl bg-slate-700 resize-none w-[60vw] p-2 h-20" onChange={async e => {
 
                                         const written = e.target.value
                                         const sendButton = document.querySelector("#send")
-                                        // if (sendButton && !written) {
 
-                                        //     const keyframes = {
-                                        //         opacity: [1, 0]
-                                        //     };
-
-                                        //     const opciones = {
-                                        //         duration: 100,
-                                        //         fillMode: 'forwards'
-                                        //     };
-
-                                        //     await sendButton.animate(keyframes, opciones).finished
-                                        //     // await sleep(500)
-
-                                        // }
 
                                         setCommentSend(Boolean(written))
                                     }} />
                                     {
                                         commentSend ?
                                             <button id="send" className="animation-fade-in h-[10%] left-[-63px] top-[55px] relative items-center w-20 hover:bg-slate-800 duration-150 justify-center flex text-center bg-slate-900 border-slate-300 border p-2 rounded-xl" onClick={async (e) => {
-                                                (e.target as HTMLInputElement).value = ""
+                                                setCommentLoading(true)
                                                 async function getComments(id: number) {
                                                     const data = await (await fetch(`/api/comments/${id}/1`)).json()
                                                     console.log(data.data)
                                                     setComments(data.data)
                                                 }
+
+                                                const comment = (document.querySelector("#newComment") as HTMLInputElement)?.value;
+                                                (document.querySelector("#newComment") as HTMLInputElement).value = "Por favor, espere"
+
+
                                                 const data = await (await fetch(`/api/comments/${mod.id}`, {
                                                     method: "POST",
                                                     body: JSON.stringify({
-                                                        "comment": (document.querySelector("#newComment") as HTMLInputElement)?.value,
+                                                        "comment": comment,
                                                         "postId": mod.id,
                                                         "token": localStorage.getItem("token")
                                                     })
                                                 })).json()
 
+                                                console.log(data)
+
+                                                // console.log(data.error)
+
                                                 if (data.error) {
-                                                    alert(data.error.data.message)
+                                                    alert(data.error)
+                                                    setCommentLoading(false);
+                                                    (document.querySelector("#newComment") as HTMLInputElement).value = comment
                                                     return
                                                 }
 
-                                                if (data.response) {
-                                                    console.log(data.response)
-                                                    let newComments = comments
-                                                    newComments.push(data.response)
+                                                // let newComments = comments
+                                                // newComments.push(data.response)
+                                                await getComments(mod.id)
 
-                                                    setComments(newComments)
-                                                    console.log(comments)
-                                                }
+                                                setCommentLoading(false);
+                                                (document.querySelector("#newComment") as HTMLInputElement).value = ""
                                             }}>
                                                 Enviar
                                             </button>
@@ -186,7 +182,7 @@ export default function ModPage({ params }: { params: { mod: string } }) {
                                 }
                                 {/* <Comment comment="hola" authorName="Rubeneitor2" date={2} /> */}
                             </div>
-                        </div>
+                        </div >
                         :
                         <div className="flex items-center w-screen h-screen justify-center text-white font-bold">
                             No se encuentra el mod solicitado
