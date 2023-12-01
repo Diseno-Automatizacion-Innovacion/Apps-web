@@ -14,7 +14,6 @@ export default function Forum() {
         async function getTema() {
             const token = localStorage.getItem("token")
 
-
             const data = await (await fetch(`/api/forum/categories/`)).json()
             setCategories(data.temas)
         }
